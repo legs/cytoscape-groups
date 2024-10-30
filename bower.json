@@ -1,0 +1,24 @@
+{
+  "name": "cytoscape-groups",
+  "description": "Use cytoscape.js compound nodes to create groups of nodes, including nested groups",
+  "main": "cytoscape-groups.js",
+  "dependencies": {
+    "cytoscape": "^3.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/legs/cytoscape-groups"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "cytoscape",
+    "cytoscape-extension"
+  ],
+  "license": "MIT"
+}
