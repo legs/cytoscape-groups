@@ -1,0 +1,158 @@
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <title>cytoscape-groups demo</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+
+    <script src="cytoscape-groups.js"></script>
+
+    <style>
+      body {
+        font-family: helvetica neue, helvetica, liberation sans, arial, sans-serif;
+        font-size: 14px;
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	      background-size: 400% 400%;
+	      animation: gradient 15s ease infinite;
+	      height: 100vh;
+      }
+
+      #cy {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+      }
+
+      h1 {
+        opacity: 0.5;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      #mode {
+        z-index: 2;
+        position: absolute;
+        /* right: 0;
+        top: 0; */
+        margin: 0.5em;
+      }
+
+      @keyframes gradient {
+	      0% {
+		      background-position: 0% 50%;
+	      }
+	      50% {
+		      background-position: 100% 50%;
+	      }
+	      100% {
+		      background-position: 0% 50%;
+	      }
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+
+        var cy = window.cy = cytoscape({
+          container: document.getElementById('cy'),
+
+          style: [
+            {
+              selector: 'node',
+              style: {
+                'label': 'data(id)'
+              }
+            },
+
+            {
+              selector: 'node:parent',
+              style: {
+                'label': 'data(id)'
+              }
+            },
+
+            {
+              selector: 'edge',
+              style: {
+                'curve-style': 'bezier',
+                'target-arrow-shape': 'triangle'
+              }
+            },
+
+            {
+              selector: '.cdnd-grabbed-node',
+              style: {
+                'background-color': 'red'
+              }
+            },
+
+            {
+              selector: '.cdnd-drop-target',
+              style: {
+                'border-color': 'red',
+                'border-style': 'dashed'
+              }
+            },
+
+            {
+              selector: '.grp-add-mode',
+              style: {
+                'background-color': 'green',
+	              'background': 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+	              'animation': 'gradient 15s ease infinite'
+              }
+            },
+
+            {
+              selector: '.grp-remove-mode',
+              style: {
+                'background-color': 'green',
+                'border-color': 'orange',
+                'border-style': 'dotted'
+              }
+            }
+          ],
+
+          elements: {
+            nodes: [
+              { data: { id: 'a' } },
+              { data: { id: 'b' } },
+              { data: { id: 'c' } },
+              { data: { id: 'd' } },
+              { data: { id: 'e' } },
+              { data: { id: 'v', parent: 'c' } },
+              { data: { id: 'w', parent: 'a' } },
+              { data: { id: 'x', parent: 'e' } },
+              { data: { id: 'y', parent: 'b' } },
+              { data: { id: 'z', parent: 'd' } }
+            ],
+            edges: [
+
+            ]
+          }
+        });
+
+        const cdnd = cy.cytoscapeGroups();
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>Cytoscape Groups Demo</h1>
+
+    <div id="cy"></div>
+
+    <div id="mode">
+      <input type="radio" id="add" name="mode" value="add" checked="checked"> Add
+      <input type="radio" id="remove" name="mode" value="remove"> Remove
+    </div>
+  </body>
+
+</html>
